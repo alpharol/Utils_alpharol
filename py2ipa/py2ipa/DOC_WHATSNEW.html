@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh">
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>《汉语拼音-国际音标转换工具 最近更新》</title>
+<meta name="author" content="徐清白" />
+<meta name="description" content="这本《最近更新》记录了汉语拼音-国际音标转换工具软件版本更新的情况。" />
+<meta name="keywords" content="汉语拼音, 国际音标, 语音学, IPA, Python, wxPython, phonetics, Chinese, Pinyin" />
+<link rel='stylesheet' type='text/css' href='doc.css' />
+
+</head>
+
+<body>
+
+<h1>《汉语拼音-国际音标转换工具 2.1版 最近更新》</h1>
+
+<h2>徐清白，2007年9月16日</h2>
+
+<p>
+这本《最近更新》记录了有关软件版本更新的情况。普通用户务必先行阅读《用户手册》(<a href="DOC_USERSGUIDE.html">DOC_USERSGUIDE.html</a>)。请从事开发工作的高级用户进一步阅读《技术手册》(<a href="DOC_TECHNICAL.html">DOC_TECHNICAL.html</a>)。</p>
+
+<hr />
+
+<p>程序的作者是<b>徐清白</b>，可通过如下网络手段取得联系：<ul>
+<li>邮件：<span class="code">xuqingbai 在 gmail 点 com</span></li>
+<li>主页：<a href="http://xuqingbai.googlepages.com">http://xuqingbai.googlepages.com</a></li>
+<li>博客：<a href="http://xuqingbai.blogspot.com">http://xuqingbai.blogspot.com</a></li>
+</ul>
+作者欢迎用户反馈使用体验，比如故障缺陷报告、改进建议等。</p>
+
+<hr />
+
+<h3>2.1版（2007年9月16日）——最新</h3>
+<ul>
+<li>实现：转换规则一揽子创建设置方案“杨润陆、周一民《现代汉语》（北师大文学院教材）”（现共6种）。</li>
+<li>改进：转换规则“o/bo/po/mo/fo有[u]韵头”改为“bo/po/mo/fo没有[u]韵头”（实际上也修正了对儿化韵的漏判和对零声母的单元音韵母o音节添加[u]韵头的错误），且默认为无效。同时在相关一揽子设置方案中添加该设置。</li>
+<li>改进：几处细微修改，比如：省略string模块的导入、采用列表遍历式（list comprehension）代替原来的用到lambda表达式的map()和filter()函数等。</li>
+<li>改进：说明文档采用XHTML格式规范。</li>
+</ul>
+
+<hr />
+
+<h3>2.0版（2007年8月25日）</h3>
+<ul>
+<li>改名：原名中的“→”字符改为“-”，从此全名“汉语拼音-国际音标转换工具”。</li>
+<li>改名：三份说明文档的文件名变更（同时升级为HTML超文本文档）：
+<ul>
+    <li>py2ipa_userguide.txt -> DOC_USERSGUIDE.html</li>
+    <li>py2ipa_technical.txt -> DOC_TECHNICAL.html</li>
+    <li>py2ipa_whatsnew.txt  -> DOC_WHATSNEW.html</li>
+</ul></li>
+<li>除障：修正编码失败后的py2ipa.py程序异常中止。</li>
+<li>除障：修正py2ipa.py程序向磁盘写入内建的简单帮助文件时的编码错误。</li>
+<li>实现：基于wxWidgets(wxPython)的图形用户界面(GUI)程序——gPY2IPA.py脚本。</li>
+<li>实现：将以单个“#”字符开头的行当作注释行，不转换；两个“#”开头的行仍转换。</li>
+<li>改进：改动py2ipa.py脚本中个别一揽子设置方案的标识名；少量修饰命令行界面的文字提示。</li>
+<li>改进：使用map()函数简化遍历过程代码。</li>
+<li>改进：cmdPair和createCmdPair分别改名为cmdPairTuple和createCmdPairTuple等。分离Pinyin2IPA()函数中的具体转换过程，建立convertPinyin2IPA()函数。</li>
+</ul>
+
+<hr />
+
+<h3>1.2版（2007年8月12日）</h3>
+<ul>
+<li>除障：修正由1.1版引入的{j/q/x}ue的转换错误。</li>
+<li>除障：修正“二”的转换泛滥错误，并变为可选设置。</li>
+<li>实现：标明不必写出隔音符号的音节间断。</li>
+<li>实现：正则表达式命令元组创建设置16种（现共21种）：
+<ul>
+    <li>“数字‘二’有大开口度韵腹”（原为固定命令）。</li>
+    <li>“ai/uai韵腹为舌面前次开元音”。</li>
+    <li>“‘央a’采用小型大写[A]标明”。</li>
+    <li>“ie/yue采用小型大写[E]标明”。</li>
+    <li>“ie/yue采用[e]标明”。</li>
+    <li>“认为ian/yuan和an一样”。</li>
+    <li>“认为仅yuan和an一样”。</li>
+    <li>“ou/iou采用舌面央中元音韵腹”。</li>
+    <li>“iong韵母采用i韵头u韵腹”。</li>
+    <li>“采用反逗号弱送气符号”。</li>
+    <li>“儿化韵卷舌动作采用卷舌小钩”。</li>
+    <li>“只有er音节卷舌动作采用卷舌小钩”。</li>
+    <li>“严格采用卷舌通音符号”。</li>
+    <li>“o/bo/po/mo/fo有[u]韵头”（原为固定命令）。</li>
+    <li>“ing有舌面央中元音韵腹”。</li>
+    <li>“隐藏所有声调转换”。</li>
+</ul></li>
+<li>实现：转换规则一揽子创建设置方案(recipe)共5种：
+<ul>
+    <li>北京大学中文系《现代汉语》（重排本）。</li>
+    <li>林焘、王理嘉《语音学教程》。</li>
+    <li>黄伯荣、廖序东《现代汉语》（增订三版）。</li>
+    <li>袁家骅等《汉语方言概要》（第二版重排）。</li>
+    <li>唐作藩《音韵学教程》（第三版）。</li>
+</ul></li>
+<li>改进：合并精简少量正则表达式替换命令。</li>
+<li>改进：缩短少量命令元组创建设置名称元素的字符串长度。</li>
+<li>改进：Pinyin2IPA()函数的设置表参数传递方式改为参数收集元组。</li>
+<li>改进：将compileReList()函数合并入createCmdPair()函数末尾。</li>
+<li>设想：开发简单的图形用户界面，至少能够控制命令元组创建设置。</li>
+<li>设想：用py2exe为Windows用户制作无需安装Python解释器即可运行的发行包。</li>
+<li>设想：根据用户反馈，全面完善设计，编写FAQ（常见问题）文档。</li>
+</ul>
+
+<hr />
+
+<h3>1.1版（2007年8月8日）</h3>
+<ul>
+<li>除障：修正ri音节的转换错误。</li>
+<li>除障：修正某些音节在行首或行尾出现时的转换错误。</li>
+<li>除障：修正w作为隔音符号与前面的i字母连写时的转换错误。</li>
+<li>改进：合并精简部分正则表达式替换命令。</li>
+<li>文档：提供《最近更新》（即本文）。</li>
+<li>附件：提供GNU通用公共许可证（第三版）文本。</li>
+<li>设想：继续广泛测试，实现更多灵活功能。</li>
+</ul>
+
+<hr />
+
+<h3>1.0版（2007年8月6日）</h3>
+<ul>
+<li>实现：完成设想的基本转换策略和程序框架，以及更多。</li>
+<li>文档：提供《用户手册》和《技术手册》。</li>
+<li>附件：提供《北风与太阳》汉字/拼音对照读物节选。</li>
+<li>设想：进一步排除故障，消除缺陷，完善转换质量。</li>
+</ul>
+
+<hr />
+
+<h3>蓝图（2007年8月3日）</h3>
+<ul>
+<li>设想：能够转换兼容GF 3006的汉语拼音文稿，尤其要处理好儿化韵。</li>
+<li>设想：模仿sed的工作流程，全部采用正则表达式替换来完成转换处理。</li>
+<li>设想：支持标准输入输出和模块导入，支持Unicode编码(UTF-8)。</li>
+</ul>
+
+<hr />
+
+<h2>全文完</h2>
+
+</body>
+
+</html>

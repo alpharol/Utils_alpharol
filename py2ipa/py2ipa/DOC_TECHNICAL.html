@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh">
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>《汉语拼音-国际音标转换工具 技术手册》</title>
+<meta name="author" content="徐清白" />
+<meta name="description" content="这本《技术手册》是为利用汉语拼音-国际音标转换工具从事开发工作的高级用户编写的模块说明。" />
+<meta name="keywords" content="汉语拼音, 国际音标, 语音学, IPA, Python, wxPython, phonetics, Chinese, Pinyin" />
+<link rel='stylesheet' type='text/css' href='doc.css' />
+
+</head>
+
+<body>
+
+<h1>《汉语拼音-国际音标转换工具 2.1版 技术手册》</h1>
+
+<h2>徐清白，2007年9月16日</h2>
+
+<p>这本《技术手册》是为利用本转换工具从事开发工作的高级用户编写的模块说明。普通用户请阅读《用户手册》(<a href="DOC_USERSGUIDE.html">DOC_USERSGUIDE.html</a>)。有关软件版本更新的情况，请看《最近更新》(<a href="DOC_WHATSNEW.html">DOC_WHATSNEW.html</a>)。</p>
+
+<hr />
+
+<p><b>“汉语拼音-国际音标转换工具”</b>是一套能将汉语拼音转换成国际音标的Python脚本程序软件。官方发布的两个程序文件名是“<span class="code">py2ipa.py</span>”和“<span class="code">gPY2IPA.py</span>”，分别是转换工具的核心模块兼命令行界面程序和图形用户界面程序。注意：本手册只对前者在开发中的问题做出解释。</p>
+
+<p>程序的作者是<b>徐清白</b>，可通过如下网络手段取得联系：<ul>
+<li>邮件：<span class="code">xuqingbai 在 gmail 点 com</span></li>
+<li>主页：<a href="http://xuqingbai.googlepages.com">http://xuqingbai.googlepages.com</a></li>
+<li>博客：<a href="http://xuqingbai.blogspot.com">http://xuqingbai.blogspot.com</a></li>
+</ul></p>
+
+<p>作者将程序按照<b>《GNU通用公共许可证（第三版）》</b>发布为<b>自由软件</b>。高级用户可以将其用于个人、教育或商业用途开发，但必须开放源代码。许可证的具体的条款请看GNU官方网站：
+<ul><li><a href="http://www.gnu.org/licenses/gpl-3.0.txt">http://www.gnu.org/licenses/gpl-3.0.txt</a></li></ul>
+还有一个非官方的简体中文翻译版本：
+<ul><li><a href="http://bergwolf.googlepages.com/gplv3_zh">http://bergwolf.googlepages.com/gplv3_zh</a></li></ul>
+本软件的压缩包内附带了这两个文件的本地副本：
+<ul><li><span class="code">gpl-3.0.txt</span></li>
+<li><span class="code">gpl-3.0_zh-cn.txt</span></li></ul>
+</p>
+
+<p>特别声明：<em><strong>一切转换结果仅供学习参考。作者不会为错误的结果承担任何法律责任。</strong></em></p>
+
+<hr />
+
+<p>本模块考虑到“明言胜于暗示”的原则，使用了所谓“条件表达式”语法，即：
+<pre>(true_value if condition else false_vale)</pre>
+而没有使用隐晦的逻辑运算符连续短路式，即：
+<pre>(condition and true_value or false_value)</pre>
+也没有使用其他类似的隐晦的表达式。因此，运行本模块的Python解释器的版本不得低于2.5版。而在本模块首次发布的2007年8月6日，作者用来测试的版本是2.5.1版。UNIX/Linux用户要特别注意，预装的Python版本可能不能运行本模块。</p>
+
+<p>本模块在发布时只经过了Windows平台上的测试。不过，在整个开发过程中，作者已经尽量避免了任何平台依赖性设计。</p>
+
+<p>开发者仍然有必要安装一种适用于输出国际音标的Unicode字体。作者推荐符合Unicode 4.0标准的Charis SIL字体——可以在SIL的官方网站下载到：
+<ul><li><a href="http://scripts.sil.org/CharisSILfont">http://scripts.sil.org/CharisSILfont</a></li></ul>
+但是这字体不是等宽字体，书写代码时用起来颇不方便。建议开发者使用DejaVu开源字体项目中的DejaVu Sans Mono字体。这是一种等宽无衬线Unicode西文字体，可以在<a href="http://dejavu.sourceforge.net">dejavu.sourceforge.net</a>找到最新版下载。</p>
+
+<p>作者发布的程序安装包，用户下载后需要解开RAR压缩包。这样就得到了一个程序文件<span class="code">py2ipa.py</span>以及若干附属的文档文件。</p>
+
+<hr />
+
+<p>核心模块文件<span class="code">py2ipa.py</span>会对模块是否正在作为独立Python程序运行做出判断。如果独立运行，模块会使用命令行界面与用户交互，完成用户指令的任务。如果作为模块导入，则仅仅定义了若干可供访问的模块级名称。当然，实际上还导入了<span class="code">os, re</span>这三个标准库模块。</p>
+
+<p>在整个模块中，开发者一般只需要调用<span class="code">Pinyin2IPA()</span>函数完成基本任务。可以向这个函数传递两个参数：
+<ol>
+<li>参数<span class="code">pinyinLines</span>：需要转换的汉语拼音文稿。
+<br />既可以是由多个字符串构成的序列，也可以是单个字符串。函数会判断参数的类型，并将后者包装进元组。</li>
+<li>参数收集元组<span class="code">prefs</span>：如果是空值，指定默认值。
+<br />用来指定一些特殊的转换规则，控制命令元组创建的选项设置。元组的成员就是在默认设置表中出现的字符串常量。</li>
+</ol>
+这个函数返回一个字符串，保存转换得到的国际音标文稿。</p>
+
+<p>作为模块的主干函数，<span class="code">Pinyin2IPA()</span>的基本运行流程是：
+<ol>
+<li>调用<span class="code">createCmdPairTuple()</span>函数，创建命令元组，然后编译正则表达式对象列表。</li>
+<li>如果参数<span class="code">pinyinLines</span>是单个字符串，先包装进元组。</li>
+<li>调用执行转换的<span class="code">convertPinyin2IPA()</span>函数，返回该函数的返回结果。</li>
+</ol>
+</p>
+<p>其中，<span class="code">convertPinyin2IPA()</span>函数的具体运行流程是：
+<ol>
+<li>调用<span class="code">decodeLine()</span>函数，对输入的字符串序列进行字符编码页解码。</li>
+<li>调用<span class="code">convertLine()</span>函数，将拼音文稿转换成国际音标文稿。</li>
+<li>用<span class="code">linesep</span>参数连接列表成员并按UTF-8编码，返回调用者。
+<br />注意：对于<span class="code">fp.readlines()</span>或<span class="code">s.splitlines(True)</span>的输入，<span class="code">linesep</span>参数用默认值即可。只有当输入<span class="code">s.splitlines(False)</span>等序列时，才需要另外指定。
+</li>
+</ol>
+</p>
+
+<hr />
+
+<p>通过<span class="code">Pinyin2IPA()</span>函数指定创建设置表的方法是参数收集元组。例如，以下用法可以接受：
+<pre>>>> from py2ipa import Pinyin2IPA
+>>> Pinyin2IPA("piao1yao2","HIDE_ALL_TONE_VALUE")
+>>> Pinyin2IPA("piao1yao2",("HIDE_ALL_TONE_VALUE"))
+>>> Pinyin2IPA("piao1yao2",frozenset("HIDE_ALL_TONE_VALUE"))
+>>> Pinyin2IPA("piao1yao2","HIDE_ALL_TONE_VALUE","SYLLABLE_JUNCTURE_BY_PLUS")
+>>> Pinyin2IPA("piao1yao2",("HIDE_ALL_TONE_VALUE","SYLLABLE_JUNCTURE_BY_PLUS"))</pre>
+以下用法不可接受：
+<pre>>>> Pinyin2IPA("piao1yao2",["HIDE_ALL_TONE_VALUE"])
+>>> Pinyin2IPA("piao1yao2",set("HIDE_ALL_TONE_VALUE"))
+>>> Pinyin2IPA("piao1yao2",["HIDE_ALL_TONE_VALUE","SYLLABLE_JUNCTURE_BY_PLUS"])</pre>要求提供的是不可变参数，元组、固定集合都可以，单个字符串也会自动包装进元组。但字符串的列表或可变集合都不行，返回<span class="code">TypeError</span>错误：“列表/集合对象不可哈希”。这参数在<span class="code">createCmdPairTuple()</span>函数中会转换成可变集合，去除重复元素和矛盾设置。</p>
+
+<p>要启用某些特殊的转换规则，除了传递参数之外，还可以修改命令列表的默认设置表。这样可以修改出专门适合某种用途的模块，但也改变了本模块文件的内容，灵活性欠佳。另外还可以使用预设的一揽子设置表传递参数，或按需设计新的一揽子设置表。新的一揽子设置表可能也需要新的转换命令创建设置，请慎重修改。</p>
+
+<p>有些转换命令创建设置之间存在系列覆盖关系，理论上有两种处理方法：
+<ol>
+<li>预先在<span class="code">createCmdPairTuple()</span>函数的开头修改<span class="code">prefSet</span>参数。</li>
+<li>在创建相关命令时再做出优先选择。</li>
+</ol>
+<span class="code">py2ipa.py</span>作者采用的是第一种方法，为的是让相关设置之间的覆盖关系更加明晰（注意：默认设置表和一揽子设置方案都是固定对象，需要先生成副本）</p>
+
+<hr />
+
+<p>下面对其他由<span class="code">Pinyin2IPA()</span>函数调用的函数的某些重要问题做出简要解说：
+<ol>
+<li><span class="code">createCmdPairTuple()</span>函数：用元组常量表达式创建正则表达式替换命令元组。
+<br />命令元组是一个二维结构，第1维表示各条命令，第2维区分匹配段和替换段。常量表达式中的若干“条件表达式”会根据设置表参数(<span class="code">prefSet</span>)定制命令。完成后，根据命令元组第2维的匹配段编译正则表达式对象列表。编译过的正则表达式对象便于反复使用，效率比每次传递字符串值要高。这在<span class="code">gPY2IPA.py</span>中更加凸现效率，其他开发者也可以绕开<span class="code">Pinyin2IPA()</span>函数，单独调用这个函数，灵活达成目标。
+</li>
+<li><span class="code">decodeLine()</span>函数：
+<br />首先假设可以进行UTF-8解码，失败后尝试GB-18030解码。如果继续失败，返回一串由同样字符数的无意义的“?”组成的结果行。GB-18030兼容编码的汉西字符混排输入数据，可能出现UTF-8解码伪成功的现象。因此，开发者应尽量提供UTF-8编码的数据输入，谨防此类故障。
+</li>
+<li><span class="code">convertLine()</span>函数：
+<br />首先将拼音文稿行中的大写字母一律转换为小写，因为在替换的过程中需要用大写的<span class="code">R</span>和<span class="code">N</span>来标记作为声母的r和n字母；而且国际音标和一般的文字或拼音不同，字母大小写没有正词法意义。然后逐个执行正则表达式替换命令元组中的替换命令，转换拼音文稿行。</li>
+</ol></p>
+
+<hr />
+
+<p>还有一点需要说明的问题：本模块使用了大量Unicode对象常量，即前附<span class="code">U</span>字的字符串常量。<span class="code">createCmdPairTuple()</span>函数还使用了大量前附<span class="code">R</span>的原字符串常量表示正则表达式。其中很多实例并不需要<span class="code">U</span>或<span class="code">R</span>的声明，不过，整齐美观起见，还是一律采用了。</p>
+
+<hr />
+
+<h2>全文完</h2>
+
+</body>
+
+</html>

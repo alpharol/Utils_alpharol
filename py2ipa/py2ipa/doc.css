@@ -1,0 +1,43 @@
+/*** CSS for ``DOC_xxxxxx.html'' files ***/
+/* font-family: */
+h1,h2,h3 {
+    font-family: DejaVu Sans, Arial, Verdana, MS Sans Serif;
+}
+b,em,li,p,strong {
+    font-family: Charis SIL, Doulos SIL, Gentium, DejaVu Sans, Lucida Sans Unicode, Arial Unicode MS;
+}
+a,pre,span.code {
+    font-family: DejaVu Sans Mono, Courier New, Fixedsys;
+}
+/* other font style: */
+h1 {
+    font-size: 20pt;
+    text-align: center;
+}
+h2 {
+    font-size: 16pt;
+    text-align: center;
+}
+h3 {
+    font-size: 16pt;
+}
+pre,span.code {
+    color: green;
+}
+pre {
+    font-weight: 600;
+}
+a,b,em,li,pre,span,strong {
+    font-size: 12pt;
+}
+/* link color and pseudo-class: */
+a {
+    color: blue;
+}
+a:hover {
+    color: red;
+}
+/* special class: */
+a.plain {
+    text-decoration: none;
+}

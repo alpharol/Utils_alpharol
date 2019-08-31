@@ -1,0 +1,32 @@
+是不是遇到了严重的阅读问题？
+
+压缩包里统共有这些文件：
+  __HELP_ME.txt         （这个显然就是本文件了）
+  doc.css
+  DOC_TECHNICAL.html
+  DOC_USERSGUIDE.html
+  DOC_WHATSNEW.html
+  gpl-3.0.txt
+  gpl-3.0_zh-cn.txt
+  gPY2IPA.py
+  py2ipa.py
+  wind_and_sun_utf8.txt
+其中的：
+  DOC_TECHNICAL.html
+  DOC_USERSGUIDE.html
+  DOC_WHATSNEW.html
+  gPY2IPA.py
+  py2ipa.py
+  wind_and_sun_utf8.txt
+这几个文件，用某种文本编辑器或WWW浏览器打开查看，发现都是“乱码”，看不懂，是不是这样？
+这说明您用的编辑器或浏览器不支持UTF-8编码，或者没有自动识别这种编码。
+
+请使用支能够持UTF-8编码的编辑器或浏览器，比如Windows Notepad(记事本)或Microsoft Word软件，
+以及Mozilla Firefox或Microsoft Internet Explorer等。
+
+如果您是开发者，建议使用Ulipad或Vim编辑器等。
+
+如果只是个别字符看起来不对头，比如只显示一个白方框，那就是字体的问题。
+Windows用户一般会有Arial Unicode MS或Lucida Sans Unicode字体，应该能解决大部分问题。
+Linux用户手里或许有DejaVu Sans系列的字体，相当不错，可以去sourceforge.net下载到。
+然后至少已经可以看DOC_USERSGUIDE.html文件了，这里就不再多说了。

@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh">
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>《汉语拼音-国际音标转换工具 用户手册》</title>
+<meta name="author" content="徐清白" />
+<meta name="description" content="这本《用户手册》是为汉语拼音-国际音标转换工具的普通用户编写的使用操作手册。" />
+<meta name="keywords" content="汉语拼音, 国际音标, 语音学, IPA, Python, wxPython, phonetics, Chinese, Pinyin" />
+<link rel='stylesheet' type='text/css' href='doc.css' />
+
+</head>
+
+<body>
+
+<h1>《汉语拼音-国际音标转换工具 2.1版 用户手册》</h1>
+
+<h2>徐清白，2007年9月16日</h2>
+
+<p>这本《用户手册》是为本转换工具的普通用户编写的使用操作手册。请从事开发工作的高级用户进一步阅读《技术手册》(<a href="DOC_TECHNICAL.html">DOC_TECHNICAL.html</a>)。有关软件版本更新的情况，请看《最近更新》(<a href="DOC_WHATSNEW.html">DOC_WHATSNEW.html</a>)。</p>
+
+<hr />
+
+<h3>目录</h3>
+
+<ol>
+<li><a href="#intro" class="plain">作品简介</a></li>
+<li><a href="#install" class="plain">安装要求</a></li>
+<li><a href="#CLI" class="plain">命令行界面程序 py2ipa.py</a></li>
+<li><a href="#GUI" class="plain">图形用户界面程序 gPY2IPA.py</a></li>
+<li><a href="#format" class="plain">文稿格式</a></li>
+</ol>
+
+<hr /><a name="intro"></a>
+
+<h3>作品简介</h3>
+
+<p><b>“汉语拼音-国际音标转换工具”</b>是一套能将汉语拼音转换成国际音标的Python脚本程序软件。本品的实际用途包括但不限于：
+<ul>
+<li>在汉语方音辨正或汉语作为第二语言（对外汉语）教学等活动中，帮助掌握普通话的规范发音。</li>
+<li>在高等院校中文专业的语音学课程中，辅助国际音标教学或学术论文写作等。</li>
+</ul></p>
+
+<p>官方发布的两个程序文件名是“<span class="code">py2ipa.py</span>”和“<span class="code">gPY2IPA.py</span>”，分别是转换工具的核心模块兼命令行界面程序和图形用户界面程序。</p>
+
+<p>程序的作者是<b>徐清白</b>，可通过如下网络手段取得联系：<ul>
+<li>邮件：<span class="code">xuqingbai 在 gmail 点 com</span></li>
+<li>主页：<a href="http://xuqingbai.googlepages.com">http://xuqingbai.googlepages.com</a></li>
+<li>博客：<a href="http://xuqingbai.blogspot.com">http://xuqingbai.blogspot.com</a></li>
+</ul></p>
+
+<p>作者将程序按照<b>《GNU通用公共许可证》</b>发布，或者说，这是一个“<b>自由软件</b>”。由于作者不拿该软件卖钱，所以一般用户也可以将其简单地理解为“免费软件”。如果您对许可证的具体条款感兴趣，请看GNU的官方网站：
+<ul><li><a href="http://www.gnu.org/licenses/gpl-3.0.txt">http://www.gnu.org/licenses/gpl-3.0.txt</a></li></ul>
+还有一个非官方的简体中文翻译版本：
+<ul><li><a href="http://bergwolf.googlepages.com/gplv3_zh">http://bergwolf.googlepages.com/gplv3_zh</a></li></ul>
+本软件的压缩包内附带了这两个文件的本地副本：
+<ul><li><span class="code">gpl-3.0.txt</span></li>
+<li><span class="code">gpl-3.0_zh-cn.txt</span></li></ul>
+</p>
+
+<p>特别声明：<em><strong>一切转换结果仅供学习参考。作者不会为错误的结果承担任何法律责任。</strong></em></p>
+
+<hr /><a name="install"></a>
+
+<h3>安装要求</h3>
+
+<p>要运行本程序，用户必须找到一台安装有<b>Python语言解释器</b>的计算机。计算机用的是什么主流操作系统都可以，但Python解释器的版本不得低于2.5版。很多UNIX/Linux系统的安装设置默认包含Python解释器，但很可能低于2.5版。建议用户到Python的官方网站下载最新版本Python的二进制程序包或源代码包：
+<ul><li><a href="http://www.python.org/download">http://www.python.org/download</a></li></ul>
+作者于2007年8月6日首次发布的时候，Python最新发布的是2.5.1版。</p>
+
+<p>此外，如果想要运行“gPY2IPA.py”脚本，即图形用户界面(GUI)程序，还必须安装<b>wxPython接口库</b>。建议用户到wxPython的官方网站下载最新版本wxPython的二进制程序包或源代码包：
+<ul><li><a href="http://www.wxpython.org/download.php">http://www.wxpython.org/download.php</a></li></ul>
+作者于2007年8月23日首次制作本程序的GUI版本时使用的wxPython为2.8.4版。如果下载二进制程序(Prebuilt Binaries)，务必选择对应Python 2.5且支持Unicode编码的版本。</p>
+
+<p>作为程序输出结果的国际音标文稿，以<b>Unicode统一字符集八位变换式（UTF-8）</b>表示。为了能够正常地观看和打印输出结果，用户还应当在计算机上安装一种Unicode字体。作者推荐符合Unicode 4.0标准的<b>Charis SIL字体</b>——可以在SIL的官方网站下载到：
+<ul><li><a href="http://scripts.sil.org/CharisSILfont">http://scripts.sil.org/CharisSILfont</a></li></ul>
+该字体也是GUI程序对字体的默认要求，相关用户最好选择这种字体。</p>
+
+<p>作者发布的程序安装包（RAR文件），用户下载后需要解开压缩才能使用。Windows用户可以用较新版本的<b>WinRAR</b>或<b>Total Commander</b>解压缩。UNIX/Linux用户可以使用<b>unrar</b>等程序解压缩。这样就得到了两个脚本程序文件以及若干附属文档文件。</p>
+
+<hr /><a name="CLI"></a>
+
+<h3>命令行界面程序 py2ipa.py</h3>
+
+“<span class="code">py2ipa.py</span>”这脚本既是本转换工具的核心模块，也是基本的命令行界面(CLI)程序。如果需要使用图形用户界面，请改用“<a href="#GUI" class="plain">gPY2IPA.py</a>”脚本。下面假定用户并不了解如何使用Python的命令行界面程序运行方法，简单介绍操作如下：</p>
+<p><b>Windows XP</b>的用户，可以打开“<b>开始-&gt;程序-&gt;附件-&gt;命令提示符</b>”，或打开“<b>开始-&gt;运行</b>”，输入<span class="code">cmd</span>命令后按“确定”，都会出现命令行窗口。如果Python解释器安装在<span class="code">C:\Python25</span>的路径下，而py2ipa.py位于<span class="code">C:\MyPy</span>目录中，那么这时就可以输入下面的命令来运行程序：
+<pre>C:\Python25\python C:\MyPy\py2ipa.py</pre></p>
+
+<p><b>UNIX/Linux</b>用户的控制台就是命令行界面，图形界面用户则需要打开一个终端窗口。正常情况下，用户不需要知道Python解释器的位置。再假定py2ipa.py位于<span class="code">~/</span>路径。这时，也可以像Windows用户那样，将<span class="code">py2ipa.py</span>作为参数传递给Python解释器来运行。但建议用户使用如下命令为py2ipa.py文件设置“可执行”属性，运行起来更方便：
+<pre>chmod +x ~/py2ipa.py</pre>
+这样,以后只需要直接执行<span class="code">~/py2ipa.py</span>命令就可以了。</p>
+
+<p>如果用户了解所用操作系统的技术细节，还有其他方法避免提供文件的路径。简明起见，下面在展示命令行操作时，均省略路径，只保留文件名。</p>
+
+<p>前面给出的命令行操作，将触发py2ipa.py程序最基本的工作方式：
+<ol><li>从标准输入流(stdin)读取汉语拼音文稿；</li>
+<li>向标准输出流(stdout)写入经过转换得到国际音标文稿。</li></ol>
+</p>
+
+<p>如果没有使用重定向操作符，stdin即键盘输入，stdout即控制台窗口。这样运行后，光标位于控制台中一个新空行的开头，等待用户用键盘输入汉语拼音文稿。可以输入一行或多行文稿（具体格式在后面的“<a href="#format" class="plain">文稿格式</a>”一节有详细说明），全部完成后按回车键，然后按<span class="code">Ctrl+Z</span>(Win)或<span class="code">Ctrl+D</span>(UNIX)组合键输入一个文件结束符并回车。正常情况下，会看到转换的结果就在下面显示出来了。</p>
+
+<p>然而，键盘通常很难完成大量文稿的输入，控制台窗口也很能无法正常显示国际音标。因此，多数情况下用户需要以磁盘文件作为输入/输出的起止存储载体。有很多文本编辑器可供编写及查看这两种文稿文件，从而保证各种实际任务的完成。</p>
+
+<p>要保存输出的国际音标文稿结果，就是要将stdout重定向到磁盘文件。无论哪种操作系统，用户都可以在py2ipa.py后面加上一个<span class="code">&gt;</span>号和一个文件名：
+<pre>python py2ipa.py &gt;result.txt</pre>
+这样，显示器的窗口中将看不到转换出来的国际音标文稿。如果指定路径下的输出文件已经存在，这时就会被新的内容覆盖。</p>
+
+<p>还有一种“追加”方式，用两个<span class="code">&gt;&gt;</span>号代替一个<span class="code">&gt;</span>号，新的内容会添补到原有文件之后。</p>
+
+<p>要读取希望输入的汉语拼音文稿，可以将stdin重定向到一个既存的磁盘文件。无论哪种操作系统，用户都可以在py2ipa.py后面加上一个<span class="code">&lt;</span>号和一个文件名：
+<pre>python py2ipa.py &lt;pinyin.txt</pre>
+这个<span class="code">pinyin.txt</span>应当已经存储有编写好的汉语拼音文稿。</p>
+
+<p>两个方向的重定向可以同时使用：
+<pre>python py2ipa.py &lt;pinyin.txt &gt;result.txt</pre>
+用户可以使用压缩包中附带的“<span class="code">SAMPLE_wind_sun.txt</span>”文件测试效果。这个文件包含了伊索寓言《北风与太阳》的一部分，有汉字和拼音对照。</p>
+
+<p>还有一种输入文件的格式，省略&lt;号，等于将文件名当作一个普通命令行参数传递给程序：
+<pre>python py2ipa.py pinyin.txt &gt;result.txt</pre>
+与stdin重定向不同，使用这种普通参数（文件名匹配式）可以一次指定输入多个文件。该参数会启动UNIX shell风格的<b>glob匹配规则</b>，利用通配符扩展文件输入的范围。Windows用户要注意，glob通配符比DOS通配符增加了诸如<span class="code">[0-9]</span>的字符类表达式。另外，这样的参数可以同时使用多个，之间用空格隔开即可。输出的结果先后对应每一个输入的文件，依次呈现。</p>
+
+<p>运行过程中，有可能某个匹配式匹配不到任何文件，或由于种种原因文件数据读取失败。然则每次出错时程序会向“标准错误流”(stderr)输出一行错误提示。如果使用了stdout重定向，错误提示是不会与结果的输出混到一起的。</p>
+
+<p>py2ipa.py程序内置了简单的使用说明，执行以下命令就可以随时看到：
+<pre>python py2ipa.py --help</pre>
+注意：<span class="code">help</span>前面有连续两道半角减号(<span class="code">-</span>)。</p>
+
+<hr /><a name="GUI"></a>
+
+<h3>图形用户界面程序 gPY2IPA.py</h3>
+
+“<span class="code">gPY2IPA.py</span>”这脚本是本软件的一个图形用户界面(GUI)外围程序，使用简便、直观，功能也比较完备。所谓外围程序，是指该脚本依赖“<span class="code">py2ipa.py</span>”脚本文件作为核心模块；运行该脚本时必须将这两个文件放在一起。除此之外，如“<a href="#install" class="plain">安装要求</a>”一节所述，用户还必须安装wxPython接口库。</p>
+
+<p>准备就绪后，<b>Windows</b>用户通常可以直接运行该脚本文件；<b>UNIX/Linux</b>用户如果为该文件设置了“可执行”属性，也可以直接运行，或者只是将其文件名作为参数传递给Python解释器。Windows用户在开始运行该脚本程序后，可能会发现，在一个平常的程序窗口之外还有一个命令行界面的窗口在背后运行。这是正常现象，无需介意——但如果不喜欢这个背后的“黑窟窿”，可以将<span class="code">gPY2IPA.py</span>文件改名为<span class="code">gPY2IPA.pyw</span>文件（如果也想如此运行字节码程序<span class="code">gPY2IPA.pyc</span>文件，则需手动变更其关联程序，由<span class="code">python.exe</span>改为<span class="code">pythonw.exe</span>，或创建一个向后者传递脚本文件参数的快捷方式）。</p>
+
+<p>开始运行后，尺寸不大的程序主窗口出现。由于是采用wxWidgets技术制作的GUI程序，窗口的外观风格在不同的GUI平台（Windows / MacOS / GTK）中可能稍有不同，基本总是与用户所在平台的本土风貌相一致，做到“入乡随俗”。但除此之外，程序主要的外观结构和使用功能并无差别。主窗口上半部分是汉语拼音文稿输入区，下半部分显示作为转换结果的国际音标文稿，两者中间主要是一排命令按钮。一开始，输入区会有一小段示范的汉语拼音文稿，而且程序已将其转换为国际音标显示在了下面。</p>
+
+<p>现在，用户可以在主窗口上方的文字输入区使用键盘输入或从剪贴板粘贴汉语拼音文稿（具体格式详见稍后的“<a href="#format" class="plain">文稿格式</a>”一节），具体操作与各GUI平台的通常操作大体相同。根据默认的设置，程序会将其自动转换为国际音标文稿，显示在主窗口下方。</p>
+
+<p>如果在性能较低的计算机上进行键盘输入，或者需要反复追加粘贴大段输入文稿，可以关闭“<b>自动转换</b>”选项（复选框），然后在全部输入完毕之后，单击“<b>立刻转换</b>”按钮，最后获得转换结果。可以使用“<b>复制结果</b>”按钮将全部转换结果直接复制到系统剪贴板，而无需用户分步手动操作。</p>
+
+<p>上下两个文稿显示区域的文字样式，默认的设定是：<b>Charis SIL字体 / 12磅（小四号）大小 / <span style="color: #000080">藏青色</span>前景颜色</b>（关于如何取得Charis SIL字体，在前面的“<a href="plain">安装要求</a>”一节有所介绍）。如果想更换文字样式设定，可以使用“<b>选择字体...</b>”按钮，从弹出的“<b>字体</b>”对话框中选择适合的样式。作者还推荐使用Doulos SIL / Gentium / DejaVu Sans / Lucida Sans Unicode / Arial Unicode MS等字体备选（尤其是前三种）。注意：<b>删除线</b>修饰在本程序中无效。</p>
+
+<p>转换工具程序最重要的选项，是各种不同的转换规则设置。在本GUI程序中，改变这些设置是非常方便的。用户只要使用“<b>设置转换规则...</b>”按钮，在弹出的“<b>设置转换规则</b>”窗口的右侧列表中切换各条规则（复选框），就可以个别地改变每一条转换规则。默认的设置表没有启用任何特殊规则——用户可以使用“<b>清空转换规则</b>”按钮恢复到这一初始状态。除此之外，程序还提供了“一揽子设置方案”的功能，即从设置表上方的下拉框中选择一套经典的转换规则体系，如“<b>林焘、王理嘉《语音学教程》</b>”等。背后主窗口的转换结果可以立刻反映规则的改变（只要开启了“<b>自动转换</b>”选项）。规则设置完毕后，请使用“<b>关闭设置窗口</b>”按钮返回主窗口。</p>
+
+<p>另外，使用主窗口的“<b>关于...</b>”按钮可以查看程序的基本信息和简单的帮助说明。使用“<b>退出</b>”按钮则可以立即结束本程序的运行。</p>
+
+<hr /><a name="format"></a>
+
+<h3>文稿格式</h3>
+
+<p>下面分别介绍由本程序输入/输出的两种文稿的写作格式与字符集编码要求：</p>
+
+<p>拼音文稿格式兼容<b>GF 3006-2001《汉语拼音方案的通用键盘表示规范》</b>。简单地说就是由<span class="code">&lt;拼音字母串&gt;+&lt;声调标号&gt;</span>构成每个字的拼音文稿。声调标号可有可无，有则取值<span class="code">1</span>-<span class="code">5</span>（半角），即普通话四声和轻声。</p>
+
+<p>拼音字母包括26个不加声调的半角拉丁字母和ɑ/ɡ/ê/ü/ẑ/ĉ/ŝ等字母。其中：
+<ul>
+<li>ɑ写成a、ê写成ea、ɡ写成g、ẑ/ĉ/ŝ写成zh/ch/sh等，都是可以的。</li>
+<li>n/l后面的ü可以写成v，但j/q/x后面的ü和整体认读必须分别写成u和yu。</li>
+<li>每个字的拼音之间可以根据正词法插入空格，或连贯书写。</li>
+<li>如果a/o/e开头的零声母音节前有连写音节，最好添加单引号'表示隔音。</li>
+<li>平常注音不使用的iou/uei/uen等非省略拼写在此全部支持。</li>
+</ul>
+其他一般情况请参考<b>《汉语拼音方案》</b>的规定。</p>
+
+<p>需要理解的是，本程序并不会对输入文稿的合法性进行检查，也就是说，如果输入的汉语拼音文稿不合规范，那么转换得到的国际音标很可能毫无意义。进一步可以说，如果输入的拉丁字母文稿根本不是汉语拼音，程序也一样会怀着最大的善意去执行转换，结果却十有八九一团糟。<strong>特别提醒</strong>：由于<span class="code">[12345]</span>这几个阿拉伯数字会一律当作声调标号处理，所以如果一定要混排非声调标号的阿拉伯数字，可以考虑用全角字符<span class="code">[１２３４５]</span>等代替（协调起见，其他数字当然最好就也用全角了）。</p>
+
+<p>另外，如果一行文稿以一个“<span class="code">#</span>”符号开头，那么这一整行都不会得到转换（只是开头的“<span class="code">#</span>”号会删除掉）。可以将这样的一行理解为文稿的注释。不过，如果一行以两个“<span class="code">#</span>”符号开头，即以“<span class="code">##</span>”开头，则照常转换（两个“<span class="code">#</span>”符号会删掉一个）。</p>
+
+<p>图形用户界面(GUI)程序的用户，只要保证操作系统确实支持UTF-8编码，便不用太多考虑编码问题；只包含普通拉丁字母和阿拉伯数字的汉语拼音文稿，对于编码也没有什么要求。然而，其他情况下可能需要处理一些汉字与拼音混合编排的文稿。这类文稿文件的字符编码页应当属于UTF-8或GB-18030两类之一。本程序对后者支持得并不完美，汉字与拼音在一行内混排时，有可能出“乱码”。因此作者推荐UTF-8编码。这样正好也与输出文稿的编码相一致。</p>
+
+<p>转换出的国际音标基本属于严式音素音标，但也不想严格到吹毛求疵。而且采用了一部分汉语言学界专用的非标准符号，如舌尖元音等。标音风格与<b>林焘、王理嘉《语音学教程》</b>大体相同，差异仅在于没有采用弱送气符号，以及ai/uai韵母没有采用[æ]韵腹。</p>
+
+<p>特别考虑了对儿化韵的转换，包括韵尾和韵腹的各种替换处理。重读音节的声调标号转换为普通话五度调值，用圆括号包围以示清晰。连读变调以及轻声对音质的影响，因标注难度较大，暂不处理，原样保留。</p>
+
+<p>输出的国际音标文稿统一使用UTF-8编码，而不用GB-18030编码。再次建议用户安装Charis SIL等字体，以便正常查看和打印文稿。</p>
+
+<p>本程序支持的特殊转换规则，可以在GUI程序中很方便地使用；其他用户请参看<a href="DOC_TECHNICAL.html" class="plain">《技术手册》</a>中的使用说明。</p>
+
+<hr />
+
+<p>最后再次声明：<em><strong>一切转换结果仅供学习参考。作者不会为错误的结果承担任何法律责任。</strong></em></p>
+
+<hr />
+
+<h2>全文完</h2>
+
+</body>
+
+</html>
