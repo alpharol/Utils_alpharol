@@ -10,9 +10,19 @@
 
 
 
+**使用**：
+
+1. 修改路径
+
 ```python
 input_path = r'C:\Users\Mr.Reliable\Desktop\蓝版.jpg'  #输入彩色图片
 output_path = "C:/Users/Mr.Reliable/Desktop/sketch.jpg"
+```
+
+2. 执行文件
+
+```python
+python sketch.py
 ```
 
 
@@ -21,4 +31,17 @@ output_path = "C:/Users/Mr.Reliable/Desktop/sketch.jpg"
 
 
 
-![image](https://github.com/alpharol/Utils_projects/blob/master/picture_to_sketch/sketch.jpg)
+![image](https://github.com/alpharol/Utils_alpharol/blob/master/picture_to_sketch/sketch.jpg)
+
+
+
+
+
+
+
+
+
+
+
+
+
