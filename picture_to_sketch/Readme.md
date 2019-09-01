@@ -12,14 +12,22 @@
 
 **使用**：
 
-1. 修改路径
+1. python3中安装PIL，其实是pillow
+
+```python
+pip install pillow
+```
+
+
+
+2. 修改路径
 
 ```python
 input_path = r'C:\Users\Mr.Reliable\Desktop\蓝版.jpg'  #输入彩色图片
 output_path = "C:/Users/Mr.Reliable/Desktop/sketch.jpg"
 ```
 
-2. 执行文件
+3. 执行文件
 
 ```python
 python sketch.py
