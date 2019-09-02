@@ -2,13 +2,13 @@
 
 <br/>
 
-###### Convert an English utterance into pronunciation using [CMU pronouncing dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict).
+##### Convert an English utterance into pronunciation using [CMU pronouncing dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict).
 
 
 
 <br/>
 
-###### Files:
+##### Files:
 
 cmu_dict.txt --> CMU pronouncing dictionary
 
@@ -24,11 +24,11 @@ process.py --> the py file
 
 <br/>
 
-###### How to use:
+##### How to use:
 
 1. if you want to convert the metadata of LJspeech, LJ_output.txt will be found in the same  catalogue.
 
-```python
+```cmd
 python process.py --mode LJ
 ```
 
@@ -36,7 +36,7 @@ python process.py --mode LJ
 
 2. if you want to convert another text file, output.txt will be found in the same catalogue.
 
-```python
+```cmd
 python process.py --mode text
 ```
 
