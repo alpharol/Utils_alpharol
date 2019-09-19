@@ -3,7 +3,7 @@ import argparse
 
 def write_dict():
     print("read cmu_dict data and write them into the dict")
-    f = open("cmu_dict.txt","r")
+    f = open("cmu_dict.txt","r",encoding = "utf-8")
     con = f.readlines()
     f.close()
     dict = {}
@@ -63,9 +63,9 @@ def convert_text(dict):
             else:
                 word = word + " " + w
         meta[i] = bytes(word + "\n",encoding = "utf-8")
-        f = open("output.txt","wb")
-        f.writelines(meta)
-        f.close()
+    f = open("output.txt","wb")
+    f.writelines(meta)
+    f.close()
 
 
 def main():
