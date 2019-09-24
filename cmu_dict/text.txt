@@ -1,3 +1,47 @@
-How are you ?
-This paper propose a great method .
-I love basketball .
+p225_001| Please call Stella.
+p225_002| Ask her to bring these things with her from the store.
+p225_003| Six spoons of fresh snow peas, five thick slabs of blue cheese, and maybe a snack for her brother Bob.
+p225_004| We also need a small plastic snake and a big toy frog for the kids.
+p225_005| She can scoop these things into three red bags, and we will go meet her Wednesday at the train station.
+p225_006| When the sunlight strikes raindrops in the air, they act as a prism and form a rainbow.
+p225_007| The rainbow is a division of white light into many beautiful colors.
+p225_008| These take the shape of a long round arch, with its path high above, and its two ends apparently beyond the horizon.
+p225_009| There is , according to legend, a boiling pot of gold at one end.
+p225_010| People look, but no one ever finds it.
+p225_011| When a man looks for something beyond his reach, his friends say he is looking for the pot of gold at the end of the rainbow.
+p225_012| Throughout the centuries people have explained the rainbow in various ways.
+p225_013| Some have accepted it as a miracle without physical explanation.
+p225_014| To the Hebrews it was a token that there would be no more universal floods.
+p225_016| The Norsemen considered the rainbow as a bridge over which the gods passed from earth to their home in the sky.
+p225_017| Others have tried to explain the phenomenon physically.
+p225_018| Aristotle thought that the rainbow was caused by reflection of the sun's rays by the rain.
+p225_019| Since then physicists have found that it is not reflection, but refraction by the raindrops which causes the rainbows.
+p225_020| Many complicated ideas about the rainbow have been formed.
+p225_021| The difference in the rainbow depends considerably upon the size of the drops, and the width of the colored band increases as the size of the drops increases.
+p225_022| The actual primary rainbow observed is said to be the effect of super imposition of a number of bows.
+p225_023| If the red of the second bow falls upon the green of the first, the result is to give a bow with an abnormally wide yellow band, since red and green light when mixed form yellow.
+p225_024| This is a very common type of bow, one showing mainly red and yellow, with little or no green or blue.
+p225_025| Why do you want to come to Edinburgh ?
+p225_026| How are you, sir ?
+p225_027| So is that it, then ?
+p225_028| Do I have a favourite ?
+p225_029| What do we do ?
+p225_030| People come into the Borders for the beauty of the background.
+p225_033| It's really no great surprise, because the price difference is so much.
+p225_035| A hostile bid is prevented for another nine months.
+p225_036| It was a close call.
+p225_037| In fact.
+p225_038| Diving is no part of football.
+p225_039| However, the decision has been welcomed by Scottish Enterprise officials.
+p225_040| believe it.
+p225_044| It was served by sheriff officers, not by the council.
+p225_045| People were determined to change the Government in the last election.
+p225_046| No details of the talks were given.
+p225_049| I have learned from him.
+p225_051| We are committed to the ban.
+p225_052| Already, he has been a tremendous influence in the dressing room.
+p225_053| I have made that offer.
+p225_054| Four other charges were dropped.
+p225_056| Clearly, it can go either way.
+p225_057| However, the City was in no doubt about the ultimate result.
+p225_058| However, the problem is the timing.
