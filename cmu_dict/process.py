@@ -1,5 +1,8 @@
 from tqdm import trange
 import argparse
+import time
+
+symbols = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2"]
 
 def write_dict():
     print("read cmu_dict data and write them into the dict")
@@ -43,12 +46,12 @@ def convert_LJ(dict):
 
 
 
-def convert_text(dict):
-    f = open("text.txt","r")
+def convert_text(text_list, dict):
+    f = open(text_list,"r")
     meta = f.readlines()
     f.close()
     for i in trange(len(meta)):
-        meta[i] = meta[i].replace(","," , ").replace("."," . ").replace("!"," ! ").replace("?"," ? ")
+        meta[i] = meta[i].replace(","," , ").replace("."," . ").replace("!"," ! ").replace("?"," ? ").replace("|","| ").replace("\n","")
         word = ""
         tmp_data = ""
         for n in meta[i].split(" "):
@@ -62,7 +65,9 @@ def convert_text(dict):
                 word = word + " " + dict[w]
             else:
                 word = word + " " + w
-        meta[i] = bytes(word + "\n",encoding = "utf-8")
+		if word[-1].strip()[-1] in symbols:
+		    word = word + " " + "."
+        meta[i] = bytes(word + "\n",encoding = "utf-8").lstrip()
     f = open("output.txt","wb")
     f.writelines(meta)
     f.close()
@@ -71,13 +76,16 @@ def convert_text(dict):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode",default="LJ",help="accept mode:LJ for LJspeech; text for normal text")
+	parser.add_argument("--text_list",default="text.txt")
     args = parser.parse_args()
-
+    
+	text_list = args.text_list
     dict = write_dict()
+	
     if args.mode == "LJ":
         convert_LJ(dict)
     else:
-        convert_text(dict)
+        convert_text(text_list, dict)
 
 
 if __name__ == "__main__":
