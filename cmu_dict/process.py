@@ -84,13 +84,19 @@ def convert_text(text_list, dict):
     f = open(text_list,"r",encoding = "utf-8")
     meta = f.readlines()
     f.close()
+
     for i in trange(len(meta)):
-        meta[i] = meta[i].replace(","," , ").replace("."," . ").replace("!"," ! ").replace("?"," ? ").replace("|","| ").replace("\n","").replace(":"," , ").replace(";"," , ").replace("(","").replace(")","").replace("[","").replace("]","").replace("-"," ").replace("'s", " 's").replace("'ll", " will").replace("'ve", " have").replace("'m", " am")
-        word = ""
+        if "|" in meta[i]:
+            meta_index = meta[i].split("|")[0]
+            meta_data = meta[i].split("|")[1]
+        else:
+            meta_data = meta[i]
+
+        meta_data = meta_data.replace(","," , ").replace("."," . ").replace("!"," ! ").replace("?"," ? ").replace("\n","").replace(":"," , ").replace(";"," , ").replace("(","").replace(")","").replace("[","").replace("]","").replace("-"," ").replace("'s", " 's").replace("'ll", " will").replace("'ve", " have").replace("'m", " am")
         tmp_data = ""
-        for n in meta[i].split(" "):
+        for n in meta_data.split(" "):
             if len(n.strip()) != 0:
-                if n[-1] in ["1","2","3","4","5","#","%","$",",",".","!","?"]:
+                if n[-1] in ["1","2","3","4","5","#","%","$",",",".","!","?","，","。","！","？"]:
                     # 如果遇到的是中文和符号，不做处理
                     tmp_data = tmp_data + " " + n
                 else:
@@ -126,7 +132,10 @@ def convert_text(text_list, dict):
                                     tmp_data = tmp_data + " " + dict[w.upper()]
         if tmp_data[-1].strip()[-1] in symbols:
             tmp_data = tmp_data + " " + "%"
-        meta[i] = bytes(tmp_data + "\n",encoding = "utf-8").lstrip()
+        if "|" in meta[i]:
+            meta[i] = bytes(meta_index + "| " + tmp_data + "\n",encoding="utf-8").lstrip()
+        else:
+            meta[i] = bytes(tmp_data + "\n",encoding = "utf-8").lstrip()
     f = open("output.txt","wb")
     f.writelines(meta)
     f.close()
