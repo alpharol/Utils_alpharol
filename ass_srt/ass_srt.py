@@ -71,17 +71,17 @@ def get_srt_subtitle(time_text):
     print("\n")
     return srt_subtitle
     
-def write_srt(srt_name, srt_subtitle):  
+def write_srt(srt_name, srt_subtitle):
     #using gbk for srt
+
     f_srt = open(srt_name,'w',encoding="gbk")
     f_srt.writelines(srt_subtitle)
     f_srt.close()
 
 
 def main():
-    ass_name = "POI_S03E01.ass"
-    srt_name = "POI_S03E01.srt"
-    
+    ass_name = "S03E09.ass"
+    srt_name = ass_name.split(".")[0] + ".srt"
     subtitle = read_ass_file(ass_name)
     new_subtitle = find_event(subtitle)
     
@@ -91,7 +91,6 @@ def main():
         
     text_num = get_format(new_subtitle)
     print("Text is the {}th of the event".format(text_num+1))
-    print("\n")
     if text_num == -9999:
         print("Attention!!!!")
         print("There is no format in event!")
@@ -99,7 +98,6 @@ def main():
     time_text = get_time_and_text(new_subtitle, text_num)        
     srt_subtitle = get_srt_subtitle(time_text)
     print("The content of srt is finished")
-    print("\n")
     
     write_srt(srt_name, srt_subtitle)
     print("Done! You can find {}".format(srt_name))
