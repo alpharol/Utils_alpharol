@@ -53,14 +53,22 @@ def get_time_and_text(new_subtitle, text_num):
             text = "".join(new_subtitle[i].split(",")[text_num:])
             # the information out of the {} is what we need
             p = re.sub(u"\\(.*?\\)|\\{.*?}|\\[.*?]", "", text)
+            #print('p:{}'.format(p))
             # whether the subtitle is bi-languange
             if "\\N" in p:
                 language_a = p.split("\\N")[0]
-                language_b = p.split("\\N")[1].rstrip("\n")
+                language_b = p.split("\\N")[1]
             else:
-                language_a = p.rsplit("\n")
+                language_a = p
                 language_b = ""
+            if type(language_a) is str and type(language_b) is str:
+                pass
+            else:
+                print('第{}句字幕不是str格式'.format(i))
+                print('a:{}'.format(language_a))
+                print('b:{}'.format(language_b))
             time_text.append([str(i), "{} --> {}".format(start, end), language_a, language_b, "\n"])
+    #print(time_text)
     return time_text
 
 def get_srt_subtitle(time_text):
@@ -80,7 +88,7 @@ def write_srt(srt_name, srt_subtitle):
 
 
 def main():
-    ass_name = "S03E09.ass"
+    ass_name = "S03E13.ass"
     srt_name = ass_name.split(".")[0] + ".srt"
     subtitle = read_ass_file(ass_name)
     new_subtitle = find_event(subtitle)
